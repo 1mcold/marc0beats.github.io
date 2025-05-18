@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="icon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>@marc0beats</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fira Code', monospace;
+      background: url('https://sun9-11.userapi.com/impg/1vraZmaWetcH5rvaJaJVKJvPvT-M80MGmvzQsg/NxkR0EzIj5o.jpg?size=1280x1280&quality=95&sign=ac420674f386d8d35c1cf96d6028a721&type=album') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      animation: floatBody 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBody {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(5px, -5px); }
+      100% { transform: translate(-5px, 5px); }
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+      animation: floatBackground 30s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBackground {
+      0% { transform: scale(1) translate(0px, 0px); }
+      50% { transform: scale(1.02) translate(10px, -10px); }
+      100% { transform: scale(1) translate(-10px, 10px); }
+    }
+
+    .profile {
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      width: 450px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .profile img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .username {
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: linear-gradient(270deg, #ff0080, #7928ca, #2afadf, #ff8c00, #ff0080);
+      background-size: 800% 800%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowText 10s ease infinite;
+      margin-top: 0.5rem;
+    }
+
+    @keyframes rainbowText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .uid {
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+
+    .bio {
+      margin: 1rem 0;
+    }
+
+    /* Новые стили кнопки и раскрывающегося текста */
+    .beat-policy {
+      margin-top: 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      background: linear-gradient(270deg, #ff0080, #7928ca, #2afadf, #ff8c00, #ff0080);
+      background-size: 800% 800%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowText 10s ease infinite;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    }
+    .beat-policy:hover {
+      background: rgba(255, 255, 255, 0.2);
+      -webkit-text-fill-color: white;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+    }
+
+    .beat-policy:after {
+      content: "▼";
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: white;
+      transition: transform 0.3s ease;
+    }
+
+    .beat-policy.active:after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .beat-text {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+      background: rgba(255, 255, 255, 0.1);
+      margin-top: 0.5rem;
+      border-radius: 10px;
+      padding: 0 15px;
+      color: #ddd;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .beat-text.open {
+      max-height: 1000px; /* достаточная высота для текста */
+      max-width: 1000px;
+      padding: 10px 15px;
+    }
+
+    .location {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .icons {
+      margin-top: 1rem;
+    }
+
+    .icons i {
+      margin: 0 0.5rem;
+      font-size: 1.5rem;
+      color: white;
+      transition: transform 0.2s, color 0.2s;
+      filter: drop-shadow(0 0 3px white);
+    }
+
+    .icons i:hover {
+      transform: scale(1.2);
+      color: #ffffff;
+      filter: drop-shadow(0 0 6px white);
+    }
+
+    .views {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 0.8rem;
+      color: #ccc;
+      z-index: 1;
+    }
+    .beat-text p {
+      margin: 0 0 1rem 0;
+      line-height: 1.5;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="profile">
+    <img src="https://sun9-11.userapi.com/impg/1vraZmaWetcH5rvaJaJVKJvPvT-M80MGmvzQsg/NxkR0EzIj5o.jpg?size=1280x1280&quality=95&sign=ac420674f386d8d35c1cf96d6028a721&type=album" alt="avatar" />
+    <!-- <div class="uid">UID 123,456</div> -->
+    <div class="username">Marc0 Beats</div>
+    <div class="bio">I'm a beatmaker.</div>
+    <div class="beat-policy" id="beatPolicyBtn">📋 Beat Policy 📋</div>
+    <div class="beat-text" id="beatPolicyText">
+      <p><strong>Beat Policy</strong></p>
+
+      <p>You are allowed to use my beats and release your songs on Spotify, Apple Music, and other platforms. Proper credit is required — either by listing me as a main artist or as a featured artist (feat. [my name]).</p>
+
+      <p>If a track starts gaining serious traction (big streams, viral success, etc.), we'll discuss future agreements in a fair and professional way.</p>
+
+      <p>I want to give artists the opportunity to express themselves freely while keeping things respectful for both sides.</p>
+
+      <p>Thanks for understanding and creating with me!</p>
+    </div>
+
+    <div class="icons">
+      <a href="https://www.youtube.com/@marc0beats"><i class="fab fa-youtube"></i></a>
+      <a href="https://soundcloud.com/marc0beats"><i class="fab fa-soundcloud"></i></a>
+      <a href="https://open.spotify.com/artist/5ft7NcQEGFNEzEY74MN6EB"><i class="fab fa-spotify"></i></a>
+      <a href="https://instagram.com/marc0beats"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+  <div class="views">👁 27</div>
+
+  <script type="text/javascript">
+    const fullText = "@marc0beats";
+    let index = 1; // начинаем с 1, чтобы сначала был '@'
+    let reverse = false;
+
+    function updateTitle() {
+      if (!reverse) {
+        document.title = fullText.substring(0, index);
+        index++;
+        if (index > fullText.length) {
+          reverse = true;
+          setTimeout(updateTitle, 1000);
+          return;
+        }
+      } else {
+        // Остановиться на '@' (индекс 1)
+        if (index > 1) {
+          index--;
+          document.title = fullText.substring(0, index);
+          setTimeout(updateTitle, 300);
+        } else {
+          // При достижении '@' остаемся и ждем 1 секунду, затем вперед
+          setTimeout(() => {
+            reverse = false;
+            index = 2; // следующий шаг после '@'
+            updateTitle();
+          }, 1000);
+        }
+        return;
+      }
+      setTimeout(updateTitle, 300);
+    }
+
+    updateTitle();
+
+
+    // Логика раскрытия кнопки Beat Policy
+    const beatPolicyBtn = document.getElementById('beatPolicyBtn');
+    const beatPolicyText = document.getElementById('beatPolicyText');
+
+    beatPolicyBtn.addEventListener('click', () => {
+      beatPolicyText.classList.toggle('open');
+      beatPolicyBtn.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

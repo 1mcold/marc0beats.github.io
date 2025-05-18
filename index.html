@@ -22,6 +22,18 @@
       animation: floatBody 20s ease-in-out infinite alternate;
     }
 
+    @media (max-width: 500px) {
+      .profile {
+        width: 90%;
+        padding: 1rem;
+      }
+
+      .beat-policy {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+      }
+    }
+
     @keyframes floatBody {
       0% { transform: translate(0px, 0px); }
       50% { transform: translate(5px, -5px); }
@@ -215,6 +227,35 @@
   </div>
   <div class="views">👁 27</div>
 
+  <div id="introScreen" style="
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    flex-direction: column;
+    color: white;
+    font-family: 'Fira Code', monospace;
+    text-align: center;
+  ">
+    <h1 style="margin-bottom: 20px;">Welcome to @marc0beats</h1>
+    <button id="enterBtn" style="
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 30px;
+      border: none;
+      background: white;
+      color: black;
+      font-weight: bold;
+    ">Enter</button>
+  </div>
+  <audio id="bgMusic" src="beat.wav" loop></audio>
+
+
   <script type="text/javascript">
     const fullText = "@marc0beats";
     let index = 1; // начинаем с 1, чтобы сначала был '@'
@@ -259,6 +300,15 @@
       beatPolicyText.classList.toggle('open');
       beatPolicyBtn.classList.toggle('active');
     });
+
+    
+    document.getElementById('enterBtn').addEventListener('click', () => {
+      document.getElementById('introScreen').style.display = 'none';
+      const music = document.getElementById('bgMusic');
+      music.volume = 0.4; // можно убрать или изменить
+      music.play().catch(e => console.log('Autoplay blocked:', e));
+    });
+
   </script>
 </body>
 </html>
